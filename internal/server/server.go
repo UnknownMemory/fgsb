@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fgsb/internal/server/handler"
 	"net/http"
 	"strconv"
 )
@@ -16,6 +17,8 @@ func NewServer(addr int) *Server {
 
 func (s *Server) Run() {
 	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", handler.Root)
 	
 	http.ListenAndServe(s.addr, mux)
 }
