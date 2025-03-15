@@ -10,7 +10,7 @@ type TemplateData struct {
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data *TemplateData) {
-	t, err := template.ParseFiles("web/templates/" + tmpl + ".html")
+	t, err := template.ParseFiles("web/templates/include/base.html" , "web/templates/pages/" + tmpl + ".html")
 	if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return

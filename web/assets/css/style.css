@@ -1,0 +1,77 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "SF6";
+  src: url(../font/SF6.ttf) format("truetype");
+}
+
+body {
+  font-family: "SF6";
+  font-size: 1.4rem;
+}
+
+.container {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.5rem;
+  margin-top: 3px;
+}
+
+.phase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(46, 46, 46);
+  color: #fff;
+  padding: 0.8rem 0;
+  width: 60%;
+  height: 80%;
+  justify-self: center;
+}
+
+.player-card {
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  background-color: rgb(46, 46, 46);
+  color: #fff;
+  width: 70%;
+  height: 80%;
+}
+
+.player-card-left {
+  justify-self: end;
+}
+
+.player-card-right {
+  justify-self: start;
+}
+
+.player-card .country,
+.player-card .info,
+.player-card .score {
+  justify-self: center;
+  align-self: center;
+}
+
+.info .sponsor {
+  padding-right: 3px;
+}
+
+.info .name {
+  padding-left: 3px;
+}

@@ -17,7 +17,7 @@ func NewServer(addr int) *Server {
 
 func (s *Server) Run() {
 	mux := http.NewServeMux()
-
+	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./web/assets"))))
 	mux.HandleFunc("/", handler.Root)
 	
 	http.ListenAndServe(s.addr, mux)
