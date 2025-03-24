@@ -89,3 +89,16 @@ body {
 .info .name {
   padding-left: 3px;
 }
+
+/* Admin */
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 4fr repeat(3, 0);
+  height: 100dvh;
+}
+
+iframe {
+  height: 100%;
+  width: 100%;
+}

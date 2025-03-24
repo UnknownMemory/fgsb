@@ -18,9 +18,13 @@ func NewServer(addr int) *Server {
 func (s *Server) Run() {
 	mux := http.NewServeMux()
 	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./web/assets"))))
-	mux.HandleFunc("/api/scoreboard/events", handler.ScoreboardEvents)
-	mux.HandleFunc("/api/scoreboard/update", handler.ScoreboardUpdate)
+
 	mux.HandleFunc("/", handler.Root)
+	mux.HandleFunc("/admin/edit-scoreboard", handler.EditScoreboard)
+	
+	mux.HandleFunc("/api/scoreboard/events", handler.SSEEvents)
+	mux.HandleFunc("POST /api/scoreboard/update", handler.SSEUpdate)
+
 	
 	http.ListenAndServe(s.addr, mux)
 }
