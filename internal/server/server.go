@@ -1,7 +1,9 @@
 package server
 
 import (
+	"embed"
 	"fgsb/internal/server/handler"
+	"io/fs"
 	"net/http"
 	"strconv"
 )
@@ -15,9 +17,14 @@ func NewServer(addr int) *Server {
 	return &Server{addr: ":"+cAddr}
 }
 
+var Assets fs.FS
+var Templates embed.FS
+
 func (s *Server) Run() {
+	handler.Templates = Templates
+	
 	mux := http.NewServeMux()
-	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./web/assets"))))
+	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(Assets))))
 
 	mux.HandleFunc("/", handler.Root)
 	mux.HandleFunc("/admin/edit-scoreboard", handler.EditScoreboard)
