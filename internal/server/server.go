@@ -29,8 +29,8 @@ func (s *Server) Run() {
 	mux.HandleFunc("/", handler.Root)
 	mux.HandleFunc("/admin/edit-scoreboard", handler.EditScoreboard)
 	
-	mux.HandleFunc("/api/scoreboard/events", handler.SSEEvents)
-	mux.HandleFunc("POST /api/scoreboard/update", handler.SSEUpdate)
+	mux.HandleFunc("/api/v1/scoreboard/events", handler.SSEEvents)
+	mux.HandleFunc("POST /api/v1/scoreboard/update", handler.SSEUpdate)
 
 	
 	http.ListenAndServe(s.addr, mux)

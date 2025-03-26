@@ -2,7 +2,7 @@ const form = document.querySelector("#edit-scoreboard");
 
 const UpdateScoreboard = async () => {
   try {
-    const res = await fetch("http://localhost:8080/api/scoreboard/update", {
+    const res = await fetch("http://localhost:8080/api/v1/scoreboard/update", {
       method: "POST",
       body: new FormData(form),
     });
