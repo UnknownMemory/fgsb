@@ -5,6 +5,8 @@ import (
 	"fgsb/internal/server/handler"
 	"io/fs"
 	"net/http"
+	"os/exec"
+	"runtime"
 	"strconv"
 )
 
@@ -37,3 +39,19 @@ func (s *Server) Run() {
 }
 
 
+func (s *Server) Open(url string) error {
+    var cmd string
+    var args []string
+
+    switch runtime.GOOS {
+    case "windows":
+        cmd = "cmd"
+        args = []string{"/c", "start", "http://localhost"+s.addr+url}
+    case "darwin":
+        cmd = "open"
+    default: // "linux", "freebsd", "openbsd", "netbsd"
+        cmd = "xdg-open"
+    }
+    args = append(args, "http://localhost"+s.addr+"/"+url)
+    return exec.Command(cmd, args...).Start()
+}

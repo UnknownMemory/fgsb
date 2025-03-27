@@ -23,10 +23,24 @@ func main() {
 	systray.Run(onReady, onExit)
 }
 
-func addQuitItem() {
-	mQuit := systray.AddMenuItem("Quit", "Exit the app")
+func initMenuItem(server *server.Server){
+	scoreboardItem := systray.AddMenuItem("Open Scoreboard", "Open Scoreboard")
 	go func() {
-		for range mQuit.ClickedCh {
+		for range scoreboardItem.ClickedCh {
+			server.Open("")
+		}
+	}()
+
+	adminItem := systray.AddMenuItem("Admin Panel", "Open Admin Panel")
+	go func() {
+		for range adminItem.ClickedCh {
+			server.Open("/admin/edit-scoreboard")
+		}
+	}()
+
+	quitItem := systray.AddMenuItem("Quit", "Exit the app")
+	go func() {
+		for range quitItem.ClickedCh {
 			systray.Quit()
 		}
 	}()
@@ -36,10 +50,13 @@ func onReady() {
 	systray.SetTemplateIcon(icon.Icon, icon.Icon)
 	systray.SetTitle("FGSB")
 	systray.SetTooltip("FGSB")
-	addQuitItem()
-
+	
 	server.Templates = static
 	server.Assets = assets
 	server := server.NewServer(8080)
-	server.Run()
+
+	go server.Run()
+	
+	initMenuItem(server)
+	server.Open("")
 }
