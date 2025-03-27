@@ -27,6 +27,7 @@ func (s *Server) Run() {
 	
 	mux := http.NewServeMux()
 	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(Assets))))
+	mux.Handle("/themes/default/", http.StripPrefix("/themes/default/", http.FileServer(http.Dir("./themes/default"))))
 
 	mux.HandleFunc("/", handler.Root)
 	mux.HandleFunc("/admin/edit-scoreboard", handler.EditScoreboard)
@@ -52,6 +53,6 @@ func (s *Server) Open(url string) error {
     default: // "linux", "freebsd", "openbsd", "netbsd"
         cmd = "xdg-open"
     }
-    args = append(args, "http://localhost"+s.addr+"/"+url)
+    args = append(args, "http://localhost"+s.addr+url)
     return exec.Command(cmd, args...).Start()
 }
