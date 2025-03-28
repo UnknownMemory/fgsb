@@ -7,6 +7,7 @@ import (
 )
 
 var Templates embed.FS
+var Theme string
 
 type TemplateData struct {
 	Title string
