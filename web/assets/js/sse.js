@@ -1,4 +1,4 @@
-const eventSource = new EventSource("http://localhost:8080/api/scoreboard/events");
+const eventSource = new EventSource("http://localhost:8080/api/v1/scoreboard/events");
 
 eventSource.onmessage = function (event) {
   const data = JSON.parse(event.data);
