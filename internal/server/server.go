@@ -6,8 +6,8 @@ import (
 	"io/fs"
 	"net/http"
 	"os/exec"
-	"runtime"
 	"strconv"
+	"syscall"
 )
 
 type Server struct {
@@ -38,20 +38,10 @@ func (s *Server) Run() {
 
 
 func (s *Server) Open(url string) error {
-    var cmd string
-    var args []string
-	
 	addr := ":" + strconv.Itoa(s.Port)
 
-    switch runtime.GOOS {
-    case "windows":
-        cmd = "cmd"
-        args = []string{"/c", "start", "http://localhost"+addr+url}
-    case "darwin":
-        cmd = "open"
-    default: // "linux", "freebsd", "openbsd", "netbsd"
-        cmd = "xdg-open"
-    }
-    args = append(args, "http://localhost"+addr+url)
-    return exec.Command(cmd, args...).Start()
+	cmd := exec.Command("cmd", "/c", "start", "http://localhost"+addr+url)
+	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+
+	return cmd.Run()
 }
