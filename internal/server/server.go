@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os/exec"
 	"strconv"
+	"strings"
 	"syscall"
 )
 
@@ -23,8 +24,12 @@ func (s *Server) Run() {
 	handler.Theme = s.Theme
 	
 	mux := http.NewServeMux()
-	mux.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.FS(Assets))))
-	mux.Handle("/themes/"+s.Theme+"/", http.StripPrefix("/themes/"+s.Theme+"/", http.FileServer(http.Dir("./themes/"+s.Theme))))
+
+	assetsFS := http.FileServer(http.FS(Assets))
+	mux.Handle("/assets/", http.StripPrefix("/assets/", disableDirList(assetsFS)))
+
+	themeFS := http.FileServer(http.Dir("./themes/"+s.Theme))
+	mux.Handle("/themes/"+s.Theme+"/", http.StripPrefix("/themes/"+s.Theme+"/", disableDirList(themeFS)))
 
 	mux.HandleFunc("/{$}", handler.Root)
 	mux.HandleFunc("/admin/edit-scoreboard", handler.EditScoreboard)
@@ -44,4 +49,16 @@ func (s *Server) Open(url string) error {
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 
 	return cmd.Run()
+}
+
+
+func disableDirList(handler http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        if strings.HasSuffix(r.URL.Path, "/") {
+            http.NotFound(w, r)
+            return
+        }
+
+        handler.ServeHTTP(w, r)
+    })
 }
