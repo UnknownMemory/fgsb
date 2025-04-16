@@ -1,4 +1,4 @@
-const form = document.querySelector("#edit-scoreboard");
+const form = document.querySelector("#edit");
 
 const UpdateScoreboard = async () => {
   try {

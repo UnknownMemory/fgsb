@@ -8,15 +8,34 @@
   padding: 0;
 }
 
+:root {
+  --fgbs-dark: #1e1e1e;
+}
+
 /* Admin */
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 4fr repeat(3, 0);
+  grid-template-columns: 1fr 0.5fr 1fr;
+  grid-template-rows: 0.8fr 1fr;
   height: 100dvh;
 }
 
-iframe {
-  height: 100%;
-  width: 100%;
+#edit {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr;
+  color: #fff;
+  background-color: var(--fgbs-dark);
+}
+
+#edit .save {
+  order: 1;
+}
+
+#edit .right-player {
+  order: 0;
+}
+
+#edit .right-player {
+  order: 2;
 }
