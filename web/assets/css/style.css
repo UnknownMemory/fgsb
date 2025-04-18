@@ -12,18 +12,32 @@
   --fgbs-dark: #1e1e1e;
 }
 
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../font/AtkinsonHyperlegibleNext-VF.ttf") format("truetype-variations");
+  src: url("../font/AtkinsonHyperlegibleNext-VF.ttf") format("truetype") tech("variations");
+  font-weight: 200 800;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Italic";
+  src: url("../font/AtkinsonHyperlegibleNext-Italic-VF.ttf") format("truetype-variations");
+  src: url("../font/AtkinsonHyperlegibleNext-Italic-VF.ttf") format("truetype") tech("variations");
+  font-weight: 200 800;
+}
+
 /* Admin */
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr;
-  grid-template-rows: 0.8fr 1fr;
   height: 100dvh;
+  font-family: "Atkinson Hyperlegible";
 }
 
 #edit {
+  height: 40%;
   display: grid;
   grid-template-columns: 1fr 0.8fr 1fr;
+  grid-template-rows: 1fr;
   color: #fff;
   background-color: var(--fgbs-dark);
 }

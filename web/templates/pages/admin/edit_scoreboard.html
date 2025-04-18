@@ -1,20 +1,22 @@
 {{define "content"}}
-<div></div>
-<form id="edit">
-  <div class="left-player">
-    <div>Player 1</div>
-    <input type="text" id="name1" name="name1" value="Player 1" />
-    <input type="number" id="score1" name="score1" value="1" />
-  </div>
+<div class="container">
+  <div></div>
+  <form id="edit">
+    <div class="left-player">
+      <div>Player 1</div>
+      <input type="text" id="name1" name="name1" value="Player 1" />
+      <input type="number" id="score1" name="score1" value="1" />
+    </div>
 
-  <div class="right-player">
-    <div>Player 2</div>
-    <input type="text" id="name2" name="name2" value="Player 2" />
-    <input type="number" id="score2" name="score2" value="1" />
-  </div>
-  <div class="save">
-    <input type="submit" value="Update Scoreboard" />
-  </div>
-</form>
+    <div class="right-player">
+      <div>Player 2</div>
+      <input type="text" id="name2" name="name2" value="Player 2" />
+      <input type="number" id="score2" name="score2" value="1" />
+    </div>
+    <div class="save">
+      <input type="submit" value="Update Scoreboard" />
+    </div>
+  </form>
+</div>
 <script defer src="/assets/js/edit.js"></script>
 {{end}}
