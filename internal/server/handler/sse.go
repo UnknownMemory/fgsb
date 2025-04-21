@@ -9,12 +9,6 @@ import (
 	"sync/atomic"
 )
 
-type FormData struct {
-	Player1 string
-	Score1 string
-	Player2 string
-	Score2 string
-}
 
 var (
 	idCounter uint64
@@ -63,11 +57,15 @@ func SSEEvents(w http.ResponseWriter, r *http.Request) {
 }
 
 func SSEUpdate(w http.ResponseWriter, r *http.Request) {
-	data := FormData{
-		Player1: r.FormValue("name1"),
-		Score1: r.FormValue("score1"),
-		Player2: r.FormValue("name2"),
-		Score2: r.FormValue("score2"),
+	err := r.ParseMultipartForm(5 << 20)
+	if err != nil {
+		http.Error(w, "Unable to parse multipart", http.StatusBadRequest)
+		return
+	}
+
+	data := make(map[string]string, len(r.MultipartForm.Value))
+	for key, values := range r.MultipartForm.Value {
+		data[key] = values[0]
 	}
 
 	jsonBytes, err := json.Marshal(data)
