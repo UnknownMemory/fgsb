@@ -67,7 +67,7 @@ func onReady() {
 	systray.SetTooltip("FGSB")
 	initMenuItem(&serv)
 	
-	serv.Open("")
+	// serv.Open("")
 }
 
 func main() {
