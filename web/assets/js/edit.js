@@ -12,7 +12,12 @@ const UpdateScoreboard = async () => {
   }
 };
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  UpdateScoreboard();
+  await UpdateScoreboard();
 });
+
+form.addEventListener("change", (e) => {
+  const element = document.querySelector(`[data-${e.target.id}]`)
+  element.textContent = e.target.value
+})
