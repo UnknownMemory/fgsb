@@ -1,6 +1,4 @@
 {
     "theme": "default",
-    "port": 8080,
-    "CHALLONGE_CLIENT_ID": "YOUR_CLIENT_ID",
-    "CHALLONGE_CLIENT_SECRET": "YOUR_CLIENT_SECRET"
+    "port": 8080
 }
