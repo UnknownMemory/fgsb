@@ -38,7 +38,10 @@ func (s *Server) Run() {
 	mux.HandleFunc("POST /api/v1/scoreboard/update", handler.SSEUpdate)
 
 	addr := ":" + strconv.Itoa(s.Port)
-	http.ListenAndServe(addr, mux)
+	err := http.ListenAndServe(addr, mux)
+	if err != nil {
+		return
+	}
 }
 
 func (s *Server) Open(url string) error {

@@ -6,9 +6,9 @@
             <span>|</span>
             <div class="player" data-player1>Player 1</div>
         </div>
-        <div class="score" data-score1>2</div>
+        <div class="score" data-score1>0</div>
         <div>-</div>
-        <div class="score" data-score2>1</div>
+        <div class="score" data-score2>0</div>
         <div class="player-card">
             <div class="player" data-player2>Player 2</div>
             <span>|</span>
@@ -17,9 +17,13 @@
     </div>
     <form id="edit">
         <div class="player left-player">
-            <div>Player 1</div>
             <div>
-                <input type="text" id="country1" name="country1" placeholder="Country" />
+                <select id="country1" name="country1" >
+                    <option value="" selected>-- Select a country</option>
+                    {{ range $key, $value := .Countries }}
+                        <option value={{ $value }}>{{$key}}</option>
+                    {{ end }}
+                </select>
                 <input type="text" id="sponsor1" name="sponsor1" placeholder="Sponsor" />
                 <input type="text" id="player1" name="player1" placeholder="Player" />
                 <input type="number" id="score1" name="score1" value="0" />
@@ -27,12 +31,16 @@
         </div>
 
         <div class="player right-player">
-            <div>Player 2</div>
             <div>
                 <input type="text" id="player2" name="player2" placeholder="Player" />
-                <input type="text" id="country2" name="country2" placeholder="Country" />
                 <input type="text" id="sponsor2" name="sponsor2" placeholder="Sponsor" />
                 <input type="number" id="score2" name="score2" value="0" />
+                <select id="country2" name="country2">
+                    <option value="" selected>-- Select a country</option>
+                    {{ range $key, $value := .Countries }}
+                    <option value={{ $value }}>{{$key}}</option>
+                    {{ end }}
+                </select>
             </div>
         </div>
         <div class="save">

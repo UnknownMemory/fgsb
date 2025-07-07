@@ -29,6 +29,7 @@
 
 input {
   font-family: "Atkinson Hyperlegible";
+  font-size: 1rem;
   border-radius: 5px;
   border-color: #27272a;
   border-style: solid;
@@ -72,6 +73,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 0.1fr 1fr;
   grid-template-rows: 0.5fr 1fr;
+  font-weight: bold;
 }
 
 .player-card {
@@ -166,7 +168,7 @@ button {
 }
 
 #edit .player > div {
-  font-size: 0.9rem;
+  /*font-size: 0.9rem;*/
   margin-bottom: 6px;
 }
 

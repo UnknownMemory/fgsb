@@ -9,19 +9,15 @@ import (
 var Templates embed.FS
 var Theme string
 
-type TemplateData struct {
-	Title string
-}
-
-func renderTemplate(w http.ResponseWriter, tmpl string, data *TemplateData) {
-	t, err := template.ParseFS(Templates, "web/templates/include/base.html" , "web/templates/pages/" + tmpl + ".html")
+func renderTemplate[T any](w http.ResponseWriter, tmpl string, data T) {
+	t, err := template.ParseFS(Templates, "web/templates/include/base.html", "web/templates/pages/"+tmpl+".html")
 	if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	err = t.Execute(w, data)
 	if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-    }
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
