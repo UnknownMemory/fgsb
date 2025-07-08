@@ -192,3 +192,17 @@ button {
 #edit .right-player {
   order: 2;
 }
+
+select {
+  font-family: "Atkinson Hyperlegible";
+  background-color: #000;
+  border-radius: 5px;
+  color: #fff;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border-color: #27272a;
+}
+
+.left-player > div, .right-player > div {
+  display: flex;
+}

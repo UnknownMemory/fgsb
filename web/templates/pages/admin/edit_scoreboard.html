@@ -26,7 +26,10 @@
                 </select>
                 <input type="text" id="sponsor1" name="sponsor1" placeholder="Sponsor" />
                 <input type="text" id="player1" name="player1" placeholder="Player" />
-                <input type="number" id="score1" name="score1" value="0" />
+
+            </div>
+            <div>
+                <input type="number" id="score1" name="score1" value="0" min="0"/>
             </div>
         </div>
 
@@ -34,13 +37,15 @@
             <div>
                 <input type="text" id="player2" name="player2" placeholder="Player" />
                 <input type="text" id="sponsor2" name="sponsor2" placeholder="Sponsor" />
-                <input type="number" id="score2" name="score2" value="0" />
                 <select id="country2" name="country2">
                     <option value="" selected>-- Select a country</option>
                     {{ range $key, $value := .Countries }}
                     <option value={{ $value }}>{{$key}}</option>
                     {{ end }}
                 </select>
+            </div>
+            <div>
+                <input type="number" id="score2" name="score2" value="0" min="0"/>
             </div>
         </div>
         <div class="save">
