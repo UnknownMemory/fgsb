@@ -5,6 +5,7 @@ import (
 	"fgsb/internal/server/handler"
 	"io/fs"
 	"net/http"
+	"os"
 	"os/exec"
 	"strconv"
 	"strings"
@@ -40,7 +41,7 @@ func (s *Server) Run() {
 	addr := ":" + strconv.Itoa(s.Port)
 	err := http.ListenAndServe(addr, mux)
 	if err != nil {
-		return
+		os.Exit(1)
 	}
 }
 
