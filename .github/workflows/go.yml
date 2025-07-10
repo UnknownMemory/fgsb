@@ -3,11 +3,10 @@ on:
   push:
     branches:
       - master
-    tags:
-      - "v*.*.*"
 
 jobs:
   build:
+    if: github.ref_type == 'tag'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +22,7 @@ jobs:
           mv config.example.json config.json
           cp -r themes/ bin/themes/
           cp -u config.json bin/
-          zip -r FGSB_win.zip bin/*
+          zip -j FGSB_win.zip bin/*
         shell: bash
       - name: Release
         uses: softprops/action-gh-release@v2
