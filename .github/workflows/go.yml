@@ -1,0 +1,32 @@
+name: FGSB Release
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.x'
+
+      - name: Build
+        run: |
+          GOOS=windows GOARCH=386 go build -o bin/FGSB.exe -ldflags="-H windowsgui"
+          mv config.example.json config.json
+          cp -r themes/ bin/themes/
+          cp -u config.json bin/
+          zip -r FGSB_win.zip bin/*
+        shell: bash
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: bin/FGSB_win.zip
