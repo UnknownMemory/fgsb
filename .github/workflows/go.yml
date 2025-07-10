@@ -29,4 +29,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          files: bin/FGSB_win.zip
+          files: FGSB_win.zip
+
+          token: ${{ secrets.PERSONAL_RELEASE_TOKEN }}
