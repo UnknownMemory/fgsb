@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    if: github.ref_type == 'tag'
+    if: contains(github.ref, 'refs/heads/master') && github.ref_type == 'tag'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
