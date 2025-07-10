@@ -1,12 +1,12 @@
 name: FGSB Release
 on:
   push:
-    branches:
-      - master
+    branches: [master]
+    tags: ['v*.*.*']
 
 jobs:
   build:
-    if: contains(github.ref, 'refs/heads/master') && github.ref_type == 'tag'
+    if: github.ref_type == 'tag'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
