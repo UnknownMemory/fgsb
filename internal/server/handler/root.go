@@ -6,20 +6,20 @@ import (
 )
 
 func Root(w http.ResponseWriter, r *http.Request) {
-	base_theme, err := template.ParseFS(Templates, "web/templates/include/base_theme.html")
+	baseTheme, err := template.ParseFS(Templates, "web/templates/include/base_theme.html")
 	if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
-	t, err := template.Must(base_theme.Clone()).ParseFiles("./themes/"+Theme+"/index.html")
+	t, err := template.Must(baseTheme.Clone()).ParseFiles("./themes/" + Theme + "/index.html")
 	if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
-    }
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	err = t.Execute(w, nil)
 	if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-    }
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
